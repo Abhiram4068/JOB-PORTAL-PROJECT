@@ -1,0 +1,24 @@
+# Windows system files
+Thumbs.db
+Desktop.ini
+
+# PHP logs
+*.log
+
+# Composer vendor folder
+vendor/
+
+# Node modules
+node_modules/
+
+# Environment / credentials
+*.env
+config.php
+
+
+
+# OS metadata
+.DS_Store
+
+# Temporary files
+*.tmp
