@@ -1,6 +1,6 @@
 # Job Portal Project (Django)
 
-A **full-stack Django project** that scrapes real-time jobs from [TimesJobs](https://www.timesjobs.com/) and allows users to filter them by role, location, and experience.
+A **full-stack Django project** that scrapes real-time jobs from [TimesJobs](https://www.timesjobs.com/) and allows users to filter them by role, location, and experience and save these jobs for future reference.
 
 ---
 
@@ -20,7 +20,7 @@ A **full-stack Django project** that scrapes real-time jobs from [TimesJobs](htt
 
 - **Frontend**: HTML, CSS, JavaScript  
 - **Backend**: Python (Django)  
-- **Database**: Not included  
+- **Database**: MySQL Workbench 
 - **Web Scraping**: BeautifulSoup / Requests  
 - **Server**: Localhost (run via Django development server)
 
