@@ -53,7 +53,7 @@
         </div>
     </div>
     <!-- Preloader Start -->
-{%if user_name%}
+{%if user_id%}
     {% include 'loginned_user_header.html' %}
 {% else %}
     {% include 'public_header.html' %}
@@ -80,80 +80,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Left content -->
-                    <div class="col-xl-3 col-lg-3 col-md-4">
-                        <div class="row">
-                            <div class="col-12">
-                                    <div class="small-section-tittle2 mb-45">
-                                    <div class="ion"> <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20px" height="12px">
-                                    <path fill-rule="evenodd"  fill="rgb(27, 207, 107)"
-                                        d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
-                                    </svg>
-                                    </div>
-                                    <h4>Filter Jobs Here</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Job Category Listing start -->
-                        <div class="job-category-listing mb-50">
-                            <!-- single one -->
-                            <div class="single-listing">
-                               <div class="small-section-tittle2">
-                                     <h4>Job Role</h4>
-                               </div>
-                                <!-- Select job items start -->
-                                <div class="select-job-items2">
-                                <form method="post" action="">
-                                    <input type="text" id="filter_job_role" placeholder="Enter Job Role" style="width:200px; padding:5px;" required><br>
-                                </form> <br>
-                                    <div class="small-section-tittle2">
-                                     <h4>Location</h4>
-                               </div>
-                                <!-- Select job items start -->
-                                <div class="select-job-items2">
-                                <form method="post" action="">
-                                    <input type="text" id="filter_job_location" placeholder="Enter location" style="width:200px; padding:5px;" required><br>
-                                </form>
-
-                                    <br>
-                                    <div class="small-section-tittle2">
-                                     <h4>Experience</h4>
-                               </div>
-                                <!-- Select job items start -->
-                                <div class="select-job-items2">
-                                <form method="post" action="">
-                                    <input type="text" id="filter_job_experience" placeholder="Enter Your Experience" style="width:200px; padding:5px;" required><br>
-                                </form>
-                                    <br>
-                                    <form onsubmit="filterjobs(); return false;">
-                                    <input type="submit" value="Filter & Find Jobs" style="width:200px; padding:5px;" >
-                                    </form><br>
-                                    <script>
-                                        function filterjobs()
-                                         {
-                                        let filterjobrole=document.getElementById('filter_job_role').value;
-                                        let filterjoblocation=document.getElementById('filter_job_location').value;
-                                        let filterjobexperience=document.getElementById('filter_job_experience').value;
-
-                                             if (!filterjobrole || !filterjoblocation || !filterjobexperience)
-                                            {
-                                                alert("Please fill in all required fields!");
-                                                return false;
-                                            }
-
-
-                                        window.location.href = "/filter_job_list?job_role="
-                                         + encodeURIComponent(filterjobrole)
-                                        +"&job_location="+encodeURIComponent(filterjoblocation)
-                                        +"&job_exp="+encodeURIComponent(filterjobexperience);
-                                        }
-                                    </script>
-
-                                </div>
-                             </div>
-                        </div>
+                    <!--  -->
 
                                 <!--  Select job items End-->
                                 <!-- select-Categories start -->
@@ -281,7 +208,7 @@
 
 
                         <!-- Job Category Listing End -->
-<!---------------------------------></div></div></div><!------------------------------------------------------------------------------------------------------------------------------------>
+<!---------------------------------><!------------------------------------------------------------------------------------------------------------------------------------>
                     <!-- Right content -->
                     <div class="col-xl-9 col-lg-9 col-md-8">
                         <!-- Featured_job_start -->
@@ -291,10 +218,10 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="count-job mb-35">
-                                            {% if matched_jobs%}
-                                                <span>Jobs found !!!</span>
+                                            {% if all_saved_jobs%}
+                                                <span>Saved Jobs!!!</span>
                                             {% else %}
-                                                <span>No jobs found for your preference!!!</span>
+                                                <span>No saved jobs!!!</span>
                                             {% endif %}
                                             <!-- Select job items start -->
 <!--                                            <div class="select-job-items">-->
@@ -318,7 +245,7 @@
                                 </div>
                                 <!-- Count of Job list End -->
                                 <!-- single-job-content -->
-                                {% for job in matched_jobs %}
+                                {% for job in all_saved_jobs %}
 
                                 <div class="single-job-items mb-30">
                                     <div class="job-items">
@@ -330,7 +257,7 @@
                                                 <h4>{{job.job_role}}</h4>
                                             </a>
                                             <ul>
-                                                <li>{{job.job_company_name}}</li>
+                                                <li>{{job.company_name}}</li>
 
                                                 <li><i class="fas fa-map-marker-alt"></i>{{job.job_location}}</li>
                                                 <li>{{job.job_salary}}</li>
@@ -341,22 +268,19 @@
                                         <a>{{job.job_experience}}</a>
                                         
                                     </div>
-                                    <span>Posted: {{job.job_posting_time}}</span>
-                                         <form method="POST" action="{% url 'save_job' %}" style="display:inline;">
+
+                                         <form method="POST" action="{% url 'delete_saved_job' %}" style="display:inline;">
                                             
                                             <input type="hidden" name="job_role" value="{{ job.job_role }}">
-                                            <input type="hidden" name="job_company_name" value="{{ job.job_company_name }}">
+                                            <input type="hidden" name="company_name" value="{{ job.company_name }}">
                                             <input type="hidden" name="job_location" value="{{ job.job_location }}">
                                             <input type="hidden" name="job_salary" value="{{ job.job_salary }}">
                                             <input type="hidden" name="job_experience" value="{{ job.job_experience }}">
                                             <!-- <input type="hidden" name="job_posting_time" value="{{ job.job_posting_time }}"> -->
-                                             {% if user_name %}
-                                                <button type="save_jobs" class="btn btn-sm btn-primary" name="save_job_button">Save Job</button>
-                                            {% else %}
-                                                <a href="{% url 'user_login' %}" class="btn btn-sm btn-primary">
-                                                            Login to Save Job
-                                                </a>    
-                                            {% endif %}
+                                             
+                                            <button type="save_jobs" class="btn btn-sm btn-primary" name="delete_save_job_button">Remove Job</button>
+                                           
+                                            
                                         </form> 
                                 </div>
                                 {% endfor %}
@@ -394,7 +318,137 @@
         <!--Pagination End  -->
         
     </main>
-    {% include 'footer.html' %}
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-bg footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                             <div class="footer-tittle">
+                                 <h4>About Us</h4>
+                                 <div class="footer-pera">
+                                     <p>Heaven frucvitful doesn't cover lesser dvsays appear creeping seasons so behold.</p>
+                                </div>
+                             </div>
+                         </div>
+
+                       </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Contact Info</h4>
+                                <ul>
+                                    <li>
+                                    <p>Address :Your address goes
+                                        here, your demo address.</p>
+                                    </li>
+                                    <li><a href="#">Phone : +8880 44338899</a></li>
+                                    <li><a href="#">Email : info@colorlib.com</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Important Link</h4>
+                                <ul>
+                                    <li><a href="#"> View Project</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Testimonial</a></li>
+                                    <li><a href="#">Proparties</a></li>
+                                    <li><a href="#">Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Newsletter</h4>
+                                <div class="footer-pera footer-pera2">
+                                 <p>Heaven fruitful doesn't over lesser in days. Appear creeping.</p>
+                             </div>
+                             <!-- Form -->
+                             <div class="footer-form" >
+                                 <div id="mc_embed_signup">
+                                     <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                     method="get" class="subscribe_form relative mail_part">
+                                         <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                         class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                         onblur="this.placeholder = ' Email Address '">
+                                         <div class="form-icon">
+                                             <button type="submit" name="submit" id="newsletter-submit"
+                                             class="email_icon newsletter-submit button-contactForm"><img src="/static/img/icon/form.png" alt=""></button>
+                                         </div>
+                                         <div class="mt-10 info"></div>
+                                     </form>
+                                 </div>
+                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <!--  -->
+               <div class="row footer-wejed justify-content-between">
+                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                          <!-- logo -->
+                          <div class="footer-logo mb-20">
+                            <a href="index.html"><img src="/static/img/logo/logo2_footer.png" alt=""></a>
+                          </div>
+                       </div>
+                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="footer-tittle-bottom">
+                            <span>5000+</span>
+                            <p>Talented Hunter</p>
+                        </div>
+                       </div>
+                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                            <div class="footer-tittle-bottom">
+                                <span>451</span>
+                                <p>Talented Hunter</p>
+                            </div>
+                       </div>
+                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                            <!-- Footer Bottom Tittle -->
+                            <div class="footer-tittle-bottom">
+                                <span>568</span>
+                                <p>Talented Hunter</p>
+                            </div>
+                       </div>
+               </div>
+            </div>
+        </div>
+        <!-- footer-bottom area -->
+        <div class="footer-bottom-area footer-bg">
+            <div class="container">
+                <div class="footer-border">
+                     <div class="row d-flex justify-content-between align-items-center">
+                         <div class="col-xl-10 col-lg-10 ">
+                             <div class="footer-copy-right">
+                                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                             </div>
+                         </div>
+                         <div class="col-xl-2 col-lg-2">
+                             <div class="footer-social f-right">
+                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                 <a href="#"><i class="fab fa-twitter"></i></a>
+                                 <a href="#"><i class="fas fa-globe"></i></a>
+                                 <a href="#"><i class="fab fa-behance"></i></a>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
 
 	<!-- JS here -->
 	

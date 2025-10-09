@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Fallback color */
+           background-image: url("/static/img/hero/how-applybg.png"); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+            grid-column: 1 / -1; /* Span both columns */
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 19px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #fb246a; /* Updated primary color */
+            color: white;
+            border: none;
+            border-radius: 19px;
+            cursor: pointer;
+            font-size: 1rem;
+            grid-column: 1 / -1; /* Span both columns for the button */
+        }
+        input[type="submit"]:hover {
+            background-color: #e91e63; /* Darker hover shade of #fb246a */
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .link {
+            text-align: center;
+            margin-top: 1rem;
+            grid-column: 1 / -1; /* Span both columns if needed, but since it's after form, it's fine */
+        }
+        .link a {
+            color: #fb246a; /* Updated link color */
+            text-decoration: none;
+        }
+        .link a:hover {
+            text-decoration: underline;
+            color: #e91e63; /* Darker hover for consistency */
+        }
+        /* On smaller screens, stack columns */
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .container {
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>SIGN UP</h2>
+        <form method="post">
+            <!-- Left Column: Personal Details -->
+            <div class="form-group">
+                <label for="fname">Full Name:</label>
+                <input type="text" id="fname" name="fname" required>
+            </div>
+            <div class="form-group">
+                <label for="phno">Phone Number:</label>
+                <input type="text" id="phno" name="phno" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="place">Place:</label>
+                <input type="text" id="place" name="place" required>
+            </div>
+            <div class="form-group">
+                <label for="district">District:</label>
+                <input type="text" id="district" name="district" required>
+            </div>
+
+            <!-- Right Column: Location & Credentials -->
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode" name="pincode" required>
+            </div>
+            <div class="form-group">
+                <label for="uname">Username:</label>
+                <input type="text" id="uname" name="uname" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <!-- Submit Button (spans both columns) -->
+            <input type="submit" value="Sign Up" name="submit">
+        </form>
+
+        <!-- Link to go back/login below the button -->
+        <div class="link">
+            <a href="/user_login">Already have an account? Login here</a><br>
+            <p>OR</p>
+            <a href="/index">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>
